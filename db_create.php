@@ -25,10 +25,11 @@
 	} */
 
 	$sql = "INSERT INTO MyGuests (firstname, lastname, email)
-			VALUES ('Joshua', 'Pellegrini', 'Joshua.P@gmail.com')";
+			VALUES ('Johson', 'Pellegrini', 'Joshua.P@gmail.com')";
 
 	if ($conn->query($sql) === TRUE) {
-		echo "New record created successfully";
+		$last_id = $conn->insert_id;
+		echo "New record created successfully. The last inserted id is: " . $last_id;
 	}
 	else{
 		echo "Error:". $ql . "<br>" . $conn->error;
