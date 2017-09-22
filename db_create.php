@@ -10,18 +10,14 @@
 		die("Connection failed:" . $conn->connect_error);
 	}
 	
-	$sql = "SELECT id, firstname, lastname, email FROM MyGuests";
+	$sql = "DELETE FROM MyGuests WHERE id=4";
 	$result = $conn->query($sql);
 
-	if ($result->num_rows > 0) {
-			//output data of each row
-		while ($row = $result->fetch_assoc() ) {
-			echo "id: " .$row["id"] . " - Name: " . $row["firstname"]. " " . $row["lastname"]. ", " . 
-			"Email: " . $row["email"] . "<br>";
-		}
-	}	
+	if ($conn->query($sql) === TRUE) {
+		echo "Record deleted successfully";
+	}
 	else {
-		echo "0 results";
+		echo "Error deleting record: " . $conn->error;
 	}
 
 	$conn->close();
