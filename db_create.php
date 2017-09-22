@@ -25,11 +25,17 @@
 	} */
 
 	$sql = "INSERT INTO MyGuests (firstname, lastname, email)
-			VALUES ('Johson', 'Pellegrini', 'Joshua.P@gmail.com')";
+			VALUES ('Seth', 'Meyers', 'Seth135@gmail.com');";
 
-	if ($conn->query($sql) === TRUE) {
-		$last_id = $conn->insert_id;
-		echo "New record created successfully. The last inserted id is: " . $last_id;
+	$sql .= "INSERT INTO MyGuests (firstname, lastname, email)
+			VALUES ('Blessing', 'Lewis', 'BlessLe@gmail.com');";
+
+	$sql .= "INSERT INTO MyGuests (firstname, lastname, email)
+			VALUES ('Charlotte', 'Williams', 'char.williams@gmail.com')";
+
+
+	if ($conn->multi_query($sql) === TRUE) {
+		echo "New records created successfully.";
 	}
 	else{
 		echo "Error:". $ql . "<br>" . $conn->error;
