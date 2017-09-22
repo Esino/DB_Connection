@@ -10,24 +10,19 @@
 		die("Connection failed:" . $conn->connect_error);
 	}
 	
-	//prepare and bind
-	$stmt = $conn->prepare("INSERT INTO MyGuests (firstname, lastname, email) 
-							VALUES (?, ?, ?)");
-	$stmt->bind_param("sss", $firstname, $lastname, $email);
+	$sql = "SELECT id, firstname, lastname, email FROM MyGuests";
+	$result = $conn->query($sql);
 
-	// Set parameters and execute
-	$firstname = "Barkley";
-	$lastname = "Ford";
-	$email = "BarkFord@gmail.com";
-	$stmt->execute();
+	if ($result->num_rows > 0) {
+			//output data of each row
+		while ($row = $result->fetch_assoc() ) {
+			echo "id: " .$row["id"] . " - Name: " . $row["firstname"]. " " . $row["lastname"]. ", " . 
+			"Email: " . $row["email"] . "<br>";
+		}
+	}	
+	else {
+		echo "0 results";
+	}
 
-	$firstname = "Anita";
-	$lastname = "Stone";
-	$email = "AniStone@gmail.com";
-	$stmt->execute();
-
-	echo "New records created successfully";
-		
-	$stmt->close();	
 	$conn->close();
 ?>
