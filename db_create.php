@@ -10,7 +10,7 @@
 		die("Connection failed:" . $conn->connect_error);
 	}
 	
-	$sql = "CREATE TABLE MyGuests (
+	/* $sql = "CREATE TABLE MyGuests (
 		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 		firstname VARCHAR(30) NOT NULL,
 		lastname VARCHAR(30) NOT NULL,
@@ -22,8 +22,17 @@
 	    echo "Table MyGuests created successfully";
 	} else {
 	    echo "Error creating table: " . $conn->error;
-	}
+	} */
 
+	$sql = "INSERT INTO MyGuests (firstname, lastname, email)
+			VALUES ('Joshua', 'Pellegrini', 'Joshua.P@gmail.com')";
+
+	if ($conn->query($sql) === TRUE) {
+		echo "New record created successfully";
+	}
+	else{
+		echo "Error:". $ql . "<br>" . $conn->error;
+	}
 		
 	$conn->close();
 ?>
